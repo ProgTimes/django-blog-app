@@ -4,13 +4,13 @@ Create a simple blog application where users can register, create and edit posts
 
 1) User.
 Use Django's built-in User model with an extension for additional field.
-Bio: TextField
+- _Bio_: TextField
 2) Post.
-Title: CharField
-Content: TextField
-Author: ForeignKey to User
-Created_at: DateTimeField(auto_now_add=True)
-Updated_at: DateTimeField(auto_now=True)
+- _Title:_ CharField
+- _Content_: TextField
+- _Author_: ForeignKey to User
+- _Created_at_: DateTimeField(auto_now_add=True)
+- _Updated_at_: DateTimeField(auto_now=True)
  
 **Views**
 
