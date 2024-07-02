@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+AUTH_USER_MODEL = "blog.User"
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -63,7 +65,7 @@ WSGI_APPLICATION = "blog_app.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg",
+        "ENGINE": "django.db.backends.postgresql",
         "HOST": os.getenv("DB_HOST"),
         "PORT": os.getenv("DB_PORT"),
         "NAME": os.getenv("DB_NAME"),
