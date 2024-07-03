@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
-from core.models import User
+from users.models import User
 
 
 class Post(models.Model):
