@@ -11,6 +11,7 @@
             {% for post in posts %}
             <!-- Blog Post -->
             <h2 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
             <p>{{ post.content|truncatewords:"250" }}</p>
             <p>
                 <span class="glyphicon glyphicon-time"></span> {{ post.created_at }} |
