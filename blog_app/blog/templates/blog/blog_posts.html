@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}All posts{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-12">
+
+            {% for post in posts %}
+            <!-- Blog Post -->
+            <h2 class="post-title"><a href="post.html">{{ post.title }}</a></h2>
+            <p>{{ post.content }}</p>
+            <p>
+                <span class="glyphicon glyphicon-time"></span> {{ post.created_at }} |
+                <span class="glyphicon glyphicon-user"></span> {{ post.author.username|title }}
+            </p>
+            <a class="btn btn-default" href="post.html">Read More</a>
+            <hr>
+            {% empty %}
+            <h3>No Content</h3>
+            {% endfor %}
+
+            <!-- Paginator -->
+            {% include 'blog/paginator.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %}
