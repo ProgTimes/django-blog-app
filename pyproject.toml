@@ -12,6 +12,7 @@ psycopg2 = "^2.9.9"
 black = "^24.4.2"
 isort = "^5.13.2"
 python-dotenv = "^1.0.1"
+pillow = "^10.4.0"
 
 [build-system]
 requires = ["poetry-core"]
