@@ -4,8 +4,11 @@ from blog.models import Post
 
 
 class BlogPostsView(generic.ListView):
-    template_name = 'blog/blog_posts.html'
+    model = Post
+    template_name = 'blog/home.html'
     context_object_name = 'posts'
 
-    def get_queryset(self):
-        return Post.objects.all()
+
+class BlogPostView(generic.DetailView):
+    model = Post
+    template_name = 'blog/detail.html'

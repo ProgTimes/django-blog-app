@@ -10,13 +10,13 @@
 
             {% for post in posts %}
             <!-- Blog Post -->
-            <h2 class="post-title"><a href="post.html">{{ post.title }}</a></h2>
-            <p>{{ post.content }}</p>
+            <h2 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            <p>{{ post.content|truncatewords:"250" }}</p>
             <p>
                 <span class="glyphicon glyphicon-time"></span> {{ post.created_at }} |
                 <span class="glyphicon glyphicon-user"></span> {{ post.author.username|title }}
             </p>
-            <a class="btn btn-default" href="post.html">Read More</a>
+            <a class="btn btn-default" href="{{ post.get_absolute_url }}">Read More</a>
             <hr>
             {% empty %}
             <h3>No Content</h3>
