@@ -4,9 +4,18 @@ from django.urls import reverse
 from users.models import User
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.title
+
+
 class Post(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, unique=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField()
     image = models.ImageField(upload_to="post-img/%Y/%m/%d", null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

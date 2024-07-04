@@ -15,10 +15,10 @@
                      </a>
                 </div>
                 <div class="entry-meta">
-                    <span class="post-category"><a href="#">Web Design</a></span>
+                    <span class="post-category"><a href="#">{{ post.category.title|title }}</a></span>
                     <span class="post-date"><a><time class="entry-date">{{ post.created_at }}</time></a></span>
-                    <span class="post-author"><a href="#">Albert Einstein</a></span>
-                    <span class="comments-link"><a>4 Comments</a></span>
+                    <span class="post-author"><a href="#">{{ post.author.username }}</a></span>
+                    <span class="comments-link"><a>{{ post.comments|length }} Comments</a></span>
                 </div>
             </header>
             <div class="entry-content clearfix">
