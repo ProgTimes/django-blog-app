@@ -1,35 +1,36 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<html>
+<head>
     <title>{% block title %}{% endblock %}</title>
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pace.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+<body>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{% static 'css/simple-blog-template.css' %}" rel="stylesheet">
-  </head>
+<!-- Header -->
+{% include 'inc/_header.html' %}
 
-  <body>
-    <!-- Navigation -->
-    {% include 'inc/_navbar.html' %}
+{% block body %}{% endblock %}
 
-    <!-- Page Content -->
-    {% block content %}{% endblock %}
+<!-- Footer -->
+{% include 'inc/_footer.html' %}
 
-    <!-- Footer -->
-    {% include 'inc/_footer.html' %}
+<!-- Mobile Menu -->
+{% include 'inc/_mobile_menu.html' %}
 
-
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery.js' %}"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  </body>
-
+<!-- js -->
+<script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/pace.min.js' %}"></script>
+<script src="{% static 'js/modernizr.custom.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
 </html>

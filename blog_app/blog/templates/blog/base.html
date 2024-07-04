@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+                {% block content %}{% endblock %}
+            </main>
+            <aside class="col-md-4">
+                {% include 'blog/inc/_categories.html' %}
+                {% include 'blog/inc/_recent_posts.html' %}
+                {% include 'blog/inc/_archives.html' %}
+            </aside>
+        </div>
+    </div>
+</div>
+{% endblock %}

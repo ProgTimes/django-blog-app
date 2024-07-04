@@ -1,31 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'blog/base.html' %}
 
 {% block title %}All posts{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <!-- Blog Entries Column -->
-        <div class="col-md-12">
-
-            {% for post in posts %}
-            <!-- Blog Post -->
-            <h2 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-            <img src="{{ post.image.url }}" alt="{{ post.title }}">
-            <p>{{ post.content|truncatewords:"250" }}</p>
-            <p>
-                <span class="glyphicon glyphicon-time"></span> {{ post.created_at }} |
-                <span class="glyphicon glyphicon-user"></span> {{ post.author.username|title }}
-            </p>
-            <a class="btn btn-default" href="{{ post.get_absolute_url }}">Read More</a>
-            <hr>
-            {% empty %}
-            <h3>No Content</h3>
-            {% endfor %}
-
-            <!-- Paginator -->
-            {% include 'inc/_paginator.html' %}
-        </div>
-    </div>
-</div>
+    {% for post in posts %}
+        <article class="post post-1">
+            <header class="entry-header">
+                <h1 class="entry-title">
+                    <a href="{{ post.get_absolute_url }}">{{ post.title|title }}</a>
+                </h1>
+                <div class="text-center">
+                     <a href="{{ post.get_absolute_url }}">
+                         <img src="{{ post.image.url }}" class="post-img" alt="{{ post.title|title }}">
+                     </a>
+                </div>
+                <div class="entry-meta">
+                    <span class="post-category"><a href="#">Web Design</a></span>
+                    <span class="post-date"><a><time class="entry-date">{{ post.created_at }}</time></a></span>
+                    <span class="post-author"><a href="#">Albert Einstein</a></span>
+                    <span class="comments-link"><a>4 Comments</a></span>
+                </div>
+            </header>
+            <div class="entry-content clearfix">
+                <p>{{ post.content|truncatewords:100 }}</p>
+                <div class="read-more cl-effect-14">
+                    <a href="{{ post.get_absolute_url }}" class="more-link">Continue reading <span class="meta-nav">→</span></a>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
 {% endblock %}
