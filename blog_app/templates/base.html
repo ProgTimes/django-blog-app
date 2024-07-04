@@ -18,7 +18,13 @@
 <!-- Header -->
 {% include 'inc/_header.html' %}
 
-{% block body %}{% endblock %}
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
 
 <!-- Footer -->
 {% include 'inc/_footer.html' %}

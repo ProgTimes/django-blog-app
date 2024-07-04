@@ -3,7 +3,7 @@
     <ul>
         {% for category in categories %}
             <li>
-                <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                <a href="{{ category.get_absolute_url }}" style="vertical-align: middle;">{{ category.title }}</a>
             </li>
         {% endfor %}
     </ul>
