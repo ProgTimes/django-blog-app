@@ -5,6 +5,7 @@ from blog.models import Post
 
 class BlogPostsView(generic.ListView):
     model = Post
+    paginate_by = 1
     template_name = 'blog/home.html'
     context_object_name = 'posts'
 

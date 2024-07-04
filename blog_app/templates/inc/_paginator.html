@@ -1,0 +1,22 @@
+{% load paginator_tags %}
+
+<div class="text-center">
+    <div class="pagination">
+        {% get_proper_elided_page_range paginator page_obj.number as page_range %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        {% endif %}
+        {% for page_number in page_range %}
+            {% if page_number == page_obj.paginator.ELLIPSIS %}
+                <a>{{ page_number }}</a>
+            {% else %}
+                <a href="?page={{ page_number }}" class="{% if page_number == page_obj.number %}active{% endif %}">
+                    {{ page_number }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        {% endif %}
+    </div>
+</div>

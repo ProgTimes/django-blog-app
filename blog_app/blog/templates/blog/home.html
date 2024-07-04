@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 
+{% load static %}
+
 {% block title %}All posts{% endblock %}
 
 {% block content %}
@@ -10,9 +12,15 @@
                     <a href="{{ post.get_absolute_url }}">{{ post.title|title }}</a>
                 </h1>
                 <div class="text-center">
-                     <a href="{{ post.get_absolute_url }}">
-                         <img src="{{ post.image.url }}" class="post-img" alt="{{ post.title|title }}">
-                     </a>
+                    <a href="{{ post.get_absolute_url }}">
+                        <img src="
+                        {% if post.image %}
+                            {{ post.image.url }}
+                        {% else %}
+                            {% static 'img/no-image.jpg' %}
+                        {% endif %}
+                        " class="post-img" alt="{{ post.title|title }}">
+                    </a>
                 </div>
                 <div class="entry-meta">
                     <span class="post-category"><a href="#">{{ post.category.title|title }}</a></span>
@@ -24,9 +32,11 @@
             <div class="entry-content clearfix">
                 <p>{{ post.content|truncatewords:100 }}</p>
                 <div class="read-more cl-effect-14">
-                    <a href="{{ post.get_absolute_url }}" class="more-link">Continue reading <span class="meta-nav">→</span></a>
+                    <a href="{{ post.get_absolute_url }}" class="more-link">Continue reading <span
+                            class="meta-nav">→</span></a>
                 </div>
             </div>
         </article>
     {% endfor %}
+    {% include 'inc/_paginator.html' %}
 {% endblock %}
