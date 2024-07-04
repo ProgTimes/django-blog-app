@@ -1,14 +1,10 @@
 <div class="widget widget-category">
     <h3 class="widget-title">Category</h3>
     <ul>
-        <li>
-            <a href="#">Web Design</a>
-        </li>
-        <li>
-            <a href="#">Web Development</a>
-        </li>
-        <li>
-            <a href="#">SEO</a>
-        </li>
+        {% for category in categories %}
+            <li>
+                <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+            </li>
+        {% endfor %}
     </ul>
 </div>
