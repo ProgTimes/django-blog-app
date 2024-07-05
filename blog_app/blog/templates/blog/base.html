@@ -2,11 +2,11 @@
 {% load sidebar_tags %}
 
 {% block content %}
-<aside class="col-md-4">
+<aside class="col-md-3">
     {% categories %}
     {% recent_posts %}
 </aside>
-<main class="col-md-8">
+<main class="col-md-9">
     {% block post_content %}{% endblock %}
 </main>
 {% endblock %}

@@ -674,23 +674,23 @@ figure {
 }
 
 .pagination {
-  display: inline-block;
+    display: inline-block;
 }
 
 .pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
 }
 
 .pagination a.active {
-  background-color: #666;
-  color: white;
-  border: 1px solid #666;
+    background-color: #666;
+    color: white;
+    border: 1px solid #666;
 }
 
 ul.errorlist {
@@ -698,6 +698,70 @@ ul.errorlist {
     padding-left: 0;
     color: #ff0503;
 }
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment {
+    margin-top: 30px;
+    padding-bottom: 15px;
+}
+
+.comment:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
+.comment .comment-author-avatar {
+    float: left;
+    margin-right: 15px;
+}
+
+.comment .comment-author-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment .comment-date {
+    color: #999;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.comment .comment-content {
+    margin-top: 10px;
+}
+
+.comment .comment-content p {
+    margin: 0;
+}
+
+.comment .comment-author-avatar img {
+    max-width: 50px;
+    border-radius: 50%;
+}
+
+@media (max-width: 767px) {
+    .comment .comment-author-avatar {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+}
+
+.comment-form {
+    margin-bottom: 40px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
 
 @media (max-width: 991px) {
     .main-nav a {

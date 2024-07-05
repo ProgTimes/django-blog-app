@@ -13,13 +13,7 @@
                 </h1>
                 <div class="text-center">
                     <a href="{{ post.get_absolute_url }}">
-                        <img src="
-                        {% if post.image %}
-                            {{ post.image.url }}
-                        {% else %}
-                            {% static 'img/no-image.jpg' %}
-                        {% endif %}
-                        " class="post-img" alt="{{ post.title|title }}">
+                        <img src="{% if post.image %}{{ post.image.url }}{% else %}{% static 'img/no-image.jpg' %}{% endif %}" class="post-img" alt="{{ post.title|title }}">
                     </a>
                 </div>
                 <div class="entry-meta">
@@ -39,6 +33,7 @@
                 </div>
             </div>
         </article>
+        <hr>
         {% empty %}
         <article class="post text-center"><h3>No content</h3></article>
     {% endfor %}
