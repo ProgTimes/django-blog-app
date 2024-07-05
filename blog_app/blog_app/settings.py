@@ -1,11 +1,14 @@
 import os
 from pathlib import Path
 
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 load_dotenv()
 
 AUTH_USER_MODEL = "users.User"
+LOGIN_URL = reverse_lazy("account:login")
+LOGIN_REDIRECT_URL = reverse_lazy("blog:post_list")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,9 +61,6 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
-            'libraries': {
-                'menu_tags': 'templatetags.menu_tags',
-            }
         },
     },
 ]

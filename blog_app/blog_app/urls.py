@@ -22,8 +22,8 @@ from blog_app import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('account/', include('users.urls'), name="blog"),
     path('', include('blog.urls'), name="blog"),
-    path('', include('users.urls'), name="blog"),
 ]
 
 if settings.DEBUG:

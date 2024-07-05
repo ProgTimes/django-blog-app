@@ -1,13 +1,20 @@
-{% load menu_tags %}
-{% menu_items as items %}
-
 <div class="overlay overlay-hugeinc">
     <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
     <nav>
-        <ul>
-            {% for title, url in items.items %}
-            <li><a href="{{ url }}">{{ title }}</a></li>
-            {% endfor %}
-        </ul>
+        <form id="logoutMob" action="{% url 'account:logout' %}" method="POST">
+            {% csrf_token %}
+            <ul>
+                <li><a href="{% url 'blog:post_list' %}" data-hover="Home">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'account:login' %}" data-hover="Account">Account</a></li>
+                    <li onclick="logoutMob.submit()">
+                        <a data-hover="Logout" style="cursor: pointer;">Logout</a>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'account:login' %}" data-hover="Login">Login</a></li>
+                {% endif %}
+            </ul>
+        </form>
+
     </nav>
 </div>

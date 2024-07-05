@@ -693,6 +693,12 @@ figure {
   border: 1px solid #666;
 }
 
+ul.errorlist {
+    list-style: none;
+    padding-left: 0;
+    color: #ff0503;
+}
+
 @media (max-width: 991px) {
     .main-nav a {
         margin-right: 19px;

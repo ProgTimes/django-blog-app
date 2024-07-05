@@ -1,13 +1,25 @@
-from django.views import generic
+from django.contrib import messages
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect
 
-from blog.models import Post
+from users.forms import UserRegisterForm, UserLoginForm
 
 
-class UserLogin(generic.ListView):
-    model = Post
+class UserLoginView(LoginView):
     template_name = 'users/login.html'
+    authentication_form = UserLoginForm
+    redirect_authenticated_user = True
 
 
-class UserRegister(generic.ListView):
-    model = Post
-    template_name = 'users/register.html'
+def register(request):
+    if request.user.is_authenticated:
+        return redirect('blog:post_list')
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Account successfully created. Now you can login')
+            return redirect("account:login")
+    else:
+        form = UserRegisterForm()
+    return render(request, 'users/register.html', {'form': form})

@@ -1,6 +1,3 @@
-{% load menu_tags %}
-{% menu_items as items %}
-
 <nav class="main-nav" role="navigation">
     <div class="navbar-header">
         <button type="button" id="trigger-overlay" class="navbar-toggle">
@@ -8,10 +5,20 @@
         </button>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
-            {% for title, url in items.items %}
-            <li class="cl-effect-11"><a href="{{ url }}" data-hover="{{ title }}">{{ title }}</a></li>
-            {% endfor %}
-        </ul>
+        <form id="logoutPC" action="{% url 'account:logout' %}" method="POST">
+            {% csrf_token %}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="cl-effect-11"><a href="{% url 'blog:post_list' %}" data-hover="Home">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li class="cl-effect-11"><a href="{% url 'account:login' %}" data-hover="Account">Account</a></li>
+                    <li class="cl-effect-11" onclick="logoutPC.submit()">
+                        <a data-hover="Logout" style="cursor: pointer;">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="cl-effect-11"><a href="{% url 'account:login' %}" data-hover="Login">Login</a></li>
+                {% endif %}
+            </ul>
+        </form>
+
     </div>
 </nav>

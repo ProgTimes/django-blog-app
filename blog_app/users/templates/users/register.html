@@ -3,23 +3,23 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<main class="col-md-12">
-    <h1 class="page-title">Register</h1>
-    <article class="post">
-        <div class="entry-content clearfix">
-            <form action="#" method="post" class="contact-form">
-                <div class="row text-center">
-                    <div class="col-md-6 col-md-offset-3">
-                        <input type="text" name="username" placeholder="Username" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <input type="password" name="password" placeholder="Password" required>
-                        <input type="password" name="password1" placeholder="Repeat password" required>
-                        <p>Already have an account? <a href="{% url 'user:login' %}">Login</a></p>
-                        <button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Continue</span></button>
+    <main class="col-md-12">
+        <h1 class="page-title">Register</h1>
+        <article class="post">
+            <div class="entry-content clearfix">
+                <form method="POST" class="contact-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            {{ form }}
+                            <div class="text-center">
+                                <p>Already have an account? <a href="{% url 'account:login' %}">Login</a></p>
+                                <button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Sign up</span></button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    </article>
-</main>
+                </form>
+            </div>
+        </article>
+    </main>
 {% endblock %}
