@@ -10,6 +10,18 @@ class PostListView(generic.ListView):
     context_object_name = 'posts'
 
 
+class PostListByCategoryView(PostListView):
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        return Post.objects.filter(category__slug=slug)
+
+
+class PostListByAuthorView(PostListView):
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        return Post.objects.filter(author__username=slug)
+
+
 class PostSingleView(generic.DetailView):
     model = Post
     template_name = 'blog/detail.html'
