@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+    <article class="profile-edit">
+        <header class="entry-header">
+            <h1 class="entry-title">Edit Profile</h1>
+        </header>
+        <div class="entry-content clearfix">
+            <form method="POST" action="{% url 'account:edit' %}" enctype="multipart/form-data"
+                  class="standard-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Update</span></button>
+            </form>
+        </div>
+    </article>
+{% endblock %}

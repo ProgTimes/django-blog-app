@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+    <article class="profile-detail">
+        <header class="entry-header">
+            <h1 class="entry-title">My Profile</h1>
+        </header>
+        <div class="entry-content">
+            <p>
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" alt="Avatar" width="64" height="64">
+                {% else %}
+                    <img src="{% static 'img/default-avatar.png' %}" alt="Avatar"  width="64" height="64">
+                {% endif %}
+            </p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Bio:</strong> {{ user.bio }}</p>
+            <a href="{% url 'account:edit' %}">
+                <button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Edit Profile</span></button>
+            </a>
+        </div>
+    </article>
+{% endblock %}

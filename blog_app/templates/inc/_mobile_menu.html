@@ -6,7 +6,7 @@
             <ul>
                 <li><a href="{% url 'blog:post_list' %}" data-hover="Home">Home</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'account:login' %}" data-hover="Account">Account</a></li>
+                    <li><a href="{% url 'account:detail' %}" data-hover="Account">Account</a></li>
                     <li onclick="logoutMob.submit()">
                         <a data-hover="Logout" style="cursor: pointer;">Logout</a>
                     </li>

@@ -10,7 +10,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="cl-effect-11"><a href="{% url 'blog:post_list' %}" data-hover="Home">Home</a></li>
                 {% if user.is_authenticated %}
-                    <li class="cl-effect-11"><a href="{% url 'account:login' %}" data-hover="Account">Account</a></li>
+                    <li class="cl-effect-11"><a href="{% url 'account:detail' %}" data-hover="Account">Account</a></li>
                     <li class="cl-effect-11" onclick="logoutPC.submit()">
                         <a data-hover="Logout" style="cursor: pointer;">Logout</a>
                     </li>
