@@ -1,3 +1,5 @@
+from blog.forms import CommentForm, PostForm
+from blog.models import Comment, Post
 from django import views
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -7,56 +9,56 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from blog.forms import CommentForm, PostForm
-from blog.models import Post, Comment
-
 
 class PostListView(generic.ListView):
     paginate_by = 1
-    template_name = 'blog/home.html'
-    context_object_name = 'posts'
+    template_name = "blog/home.html"
+    context_object_name = "posts"
 
     def get_queryset(self):
-        queryset = Post.objects.all().select_related("author", "category").annotate(
-            comment_count=Count('comments')
-        ).order_by('-created_at')
-        if q := self.request.GET.get('q'):
+        queryset = (
+            Post.objects.all()
+            .select_related("author", "category")
+            .annotate(comment_count=Count("comments"))
+            .order_by("-created_at")
+        )
+        if q := self.request.GET.get("q"):
             queryset = queryset.filter(Q(title__icontains=q) | Q(content__icontains=q))
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['q'] = self.request.GET.get('q', '')
+        context["q"] = self.request.GET.get("q", "")
         return context
 
 
 class PostListByCategoryView(PostListView):
     def get_queryset(self):
-        slug = self.kwargs['slug']
+        slug = self.kwargs["slug"]
         return super().get_queryset().filter(category__slug=slug)
 
 
 class PostListByAuthorView(PostListView):
     def get_queryset(self):
-        slug = self.kwargs['slug']
+        slug = self.kwargs["slug"]
         return super().get_queryset().filter(author__username=slug)
 
 
 class PostSingleView(generic.DetailView):
-    template_name = 'blog/detail.html'
-    context_object_name = 'post'
+    template_name = "blog/detail.html"
+    context_object_name = "post"
 
     def get_queryset(self):
-        slug = self.kwargs['slug']
-        return Post.objects.filter(
-            slug=slug
-        ).select_related("author", "category").prefetch_related(
-            Prefetch("comments", queryset=Comment.objects.select_related("author"))
+        slug = self.kwargs["slug"]
+        return (
+            Post.objects.filter(slug=slug)
+            .select_related("author", "category")
+            .prefetch_related(Prefetch("comments", queryset=Comment.objects.select_related("author")))
         )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comment_form'] = CommentForm()
+        context["comment_form"] = CommentForm()
         return context
 
 
@@ -65,47 +67,47 @@ class AddCommentView(LoginRequiredMixin, views.View):
         post = get_object_or_404(Post, pk=post_id)
         form = CommentForm(request.POST)
         if form.is_valid():
-            content = form.cleaned_data['comment']
+            content = form.cleaned_data["comment"]
             Comment.objects.create(post=post, author=request.user, content=content)
-            messages.success(request, 'Your comment has been successfully added ')
+            messages.success(request, "Your comment has been successfully added ")
         else:
-            messages.error(request, 'You comment has not been added')
+            messages.error(request, "You comment has not been added")
         return redirect(f"{reverse('blog:post_detail', kwargs={'slug': post.slug})}#comments")
 
 
 class PostCreateView(LoginRequiredMixin, generic.CreateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/edit.html'
-    context_object_name = 'post'
+    template_name = "blog/edit.html"
+    context_object_name = "post"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('blog:post_detail', kwargs={'slug': self.object.slug})
+        return reverse_lazy("blog:post_detail", kwargs={"slug": self.object.slug})
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/edit.html'
-    context_object_name = 'post'
+    template_name = "blog/edit.html"
+    context_object_name = "post"
 
     def get_queryset(self):
-        slug = self.kwargs['slug']
+        slug = self.kwargs["slug"]
         return Post.objects.filter(slug=slug)
 
     def get_success_url(self):
-        return reverse_lazy('blog:post_detail', kwargs={'slug': self.object.slug})
+        return reverse_lazy("blog:post_detail", kwargs={"slug": self.object.slug})
 
     def test_func(self):
-        post = get_object_or_404(Post, slug=self.kwargs['slug'])
+        post = get_object_or_404(Post, slug=self.kwargs["slug"])
         return self.request.user == post.author
 
     def handle_no_permission(self):
-        return redirect('blog:post_detail', slug=self.kwargs['slug'])
+        return redirect("blog:post_detail", slug=self.kwargs["slug"])
 
 
 @login_required
@@ -114,4 +116,4 @@ def delete_post(request, slug):
     if request.user == post.author and request.method == "POST":
         messages.success(request, "Post has been successfully deleted")
         post.delete()
-    return redirect(reverse_lazy('blog:post_list'))
+    return redirect(reverse_lazy("blog:post_list"))

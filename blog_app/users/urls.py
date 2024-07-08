@@ -1,7 +1,6 @@
+import users.views as user_views
 from django.contrib.auth import views as auth_views
 from django.urls import path
-
-import users.views as user_views
 
 app_name = "account"
 

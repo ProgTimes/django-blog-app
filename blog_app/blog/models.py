@@ -1,7 +1,6 @@
 from autoslug import AutoSlugField
 from django.db import models
 from django.urls import reverse
-
 from users.models import User
 
 
@@ -13,16 +12,16 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:category', kwargs={'slug': self.slug})
+        return reverse("blog:category", kwargs={"slug": self.slug})
 
     class Meta:
-        verbose_name_plural = 'categories'
+        verbose_name_plural = "categories"
         ordering = ["title"]
 
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = AutoSlugField(populate_from="title", unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField()
     image = models.ImageField(upload_to="post-img/%Y/%m/%d", null=True, blank=True)
@@ -34,7 +33,7 @@ class Post(models.Model):
         return f"{self.title} (by {self.author.username})"
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', kwargs={'slug': self.slug})
+        return reverse("blog:post_detail", kwargs={"slug": self.slug})
 
     class Meta:
         ordering = ["-created_at"]
@@ -42,7 +41,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     content = models.TextField(max_length=350)
     created_at = models.DateTimeField(auto_now_add=True)
 
