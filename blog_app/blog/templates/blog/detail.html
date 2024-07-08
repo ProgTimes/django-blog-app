@@ -17,7 +17,7 @@
                 <span class="post-date"><a><time class="entry-date">{{ post.created_at }}</time></a></span>
                 <span class="post-author"><a
                         href="{% url 'blog:author' post.author.username %}">{{ post.author.username }}</a></span>
-                <span class="comments-link"><a>{{ post.comments|length }} Comments</a></span>
+                <span class="comments-link"><a>{{ post.comments.all|length }} Comments</a></span>
             </div>
         </header>
         <div class="entry-content clearfix">
@@ -56,12 +56,7 @@
         {% for comment in post.comments.all|dictsortreversed:"created_at" %}
             <div class="comment">
                 <div class="comment-author-avatar">
-                    <img src="
-
-
-
-
-                            {% if comment.author.avatar %}{{ comment.author.avatar.url }}{% else %}{% static 'img/default-avatar.png' %}{% endif %}"
+                    <img src="{% if comment.author.avatar %}{{ comment.author.avatar.url }}{% else %}{% static 'img/default-avatar.png' %}{% endif %}"
                          alt="{{ comment.author.username }}" class="img-circle" width="43" height="43">
                 </div>
                 <div class="comment-body">

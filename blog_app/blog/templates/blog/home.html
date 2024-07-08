@@ -33,7 +33,7 @@
                 </div>
             </div>
         </article>
-        <hr>
+        {% if not forloop.last %}<hr>{% endif %}
         {% empty %}
         <article class="post text-center"><h3>No content</h3></article>
     {% endfor %}

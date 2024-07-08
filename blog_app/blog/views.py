@@ -1,7 +1,7 @@
 from django import views
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views import generic
@@ -11,12 +11,20 @@ from blog.models import Post, Comment
 
 
 class PostListView(generic.ListView):
-    paginate_by = 10
+    paginate_by = 1
     template_name = 'blog/home.html'
     context_object_name = 'posts'
 
     def get_queryset(self):
-        return Post.objects.all().select_related("author", "category").annotate(comment_count=Count('comments'))
+        queryset = Post.objects.all().select_related("author", "category").annotate(comment_count=Count('comments'))
+        if q := self.request.GET.get('q'):
+            queryset = queryset.filter(Q(title__icontains=q) | Q(content__icontains=q))
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q', '')
+        return context
 
 
 class PostListByCategoryView(PostListView):

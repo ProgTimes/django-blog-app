@@ -105,13 +105,13 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-debug-toolbar"
-version = "4.4.4"
+version = "4.4.5"
 description = "A configurable set of panels that display various debug information about the current request/response."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_debug_toolbar-4.4.4-py3-none-any.whl", hash = "sha256:f0d0598e783474cb3741ad5e458d636b1a0b22c830de7d21024ac6a383d3fd96"},
-    {file = "django_debug_toolbar-4.4.4.tar.gz", hash = "sha256:c16a6d2de936f75ae8ea4ca24647331f7dd8947e47bcb15e31931da987267950"},
+    {file = "django_debug_toolbar-4.4.5-py3-none-any.whl", hash = "sha256:91425606673ee674d780f7aeedf3595c264eb382dcf41f55c6779577900904c0"},
+    {file = "django_debug_toolbar-4.4.5.tar.gz", hash = "sha256:8298ce966b4c8fc71430082dd4739ef2badb5f867734e1973a413c4ab2ea81b7"},
 ]
 
 [package.dependencies]
