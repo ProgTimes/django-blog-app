@@ -11,7 +11,7 @@ class CommentForm(forms.Form):
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Title'}))
-    image = forms.ImageField()
+    image = forms.ImageField(required=False)
     content = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Content'}))
 
     class Meta:

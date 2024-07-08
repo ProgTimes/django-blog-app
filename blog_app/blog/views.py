@@ -2,7 +2,7 @@ from django import views
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Count, Prefetch
+from django.db.models import Count, Prefetch, Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -15,6 +15,7 @@ class PostListView(generic.ListView):
     paginate_by = 1
     template_name = 'blog/home.html'
     context_object_name = 'posts'
+    ordering = ['-created_at']
 
     def get_queryset(self):
         queryset = Post.objects.all().select_related("author", "category").annotate(comment_count=Count('comments'))
