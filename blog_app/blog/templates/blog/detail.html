@@ -64,7 +64,7 @@
                 </div>
             {% endfor %}
         {% endif %}
-        {% for comment in post.comments.all|dictsortreversed:"created_at" %}
+        {% for comment in post.comments.all %}
             <div class="comment">
                 <div class="comment-author-avatar">
                     <img src="{% if comment.author.avatar %}{{ comment.author.avatar.url }}{% else %}{% static 'img/default-avatar.png' %}{% endif %}"

@@ -16,6 +16,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'categories'
+        ordering = ["title"]
 
 
 class Post(models.Model):
@@ -34,6 +35,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
+    class Meta:
+        ordering = ["-created_at"]
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,3 +47,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+
+    class Meta:
+        ordering = ["-created_at"]

@@ -15,10 +15,11 @@ class PostListView(generic.ListView):
     paginate_by = 1
     template_name = 'blog/home.html'
     context_object_name = 'posts'
-    ordering = ['-created_at']
 
     def get_queryset(self):
-        queryset = Post.objects.all().select_related("author", "category").annotate(comment_count=Count('comments'))
+        queryset = Post.objects.all().select_related("author", "category").annotate(
+            comment_count=Count('comments')
+        ).order_by('-created_at')
         if q := self.request.GET.get('q'):
             queryset = queryset.filter(Q(title__icontains=q) | Q(content__icontains=q))
         return queryset
