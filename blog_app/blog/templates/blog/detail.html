@@ -21,8 +21,19 @@
             </div>
         </header>
         <div class="entry-content clearfix">
-            <p>{{ post.content }}</p>
+            <p class="break-word">{{ post.content }}</p>
         </div>
+        {% if user.is_authenticated and user == post.author %}
+            <div class="post-actions" style="display: flex; gap: 10px;">
+                <a href="{% url 'blog:edit_post' post.slug %}">
+                    <button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Edit</span></button>
+                </a>
+                <form method="POST" action="{% url 'blog:delete_post' post.slug %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-send btn-5"><span>Delete</span></button>
+                </form>
+            </div>
+        {% endif %}
     </article>
 
     <!-- Comment Form -->
@@ -58,9 +69,6 @@
                 <div class="comment-author-avatar">
                     <img src="
 
-
-
-
                             {% if comment.author.avatar %}{{ comment.author.avatar.url }}{% else %}{% static 'img/default-avatar.png' %}{% endif %}"
                          alt="{{ comment.author.username }}" class="img-circle" width="43" height="43">
                 </div>
@@ -68,7 +76,7 @@
                     <div class="comment-author-name">{{ comment.author.username }}</div>
                     <div class="comment-date">{{ comment.created_at }}</div>
                     <div class="comment-content">
-                        <p>{{ comment.content }}</p>
+                        <p class="break-word">{{ comment.content }}</p>
                     </div>
                 </div>
             </div>
