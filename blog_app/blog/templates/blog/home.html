@@ -5,6 +5,14 @@
 {% block title %}All posts{% endblock %}
 
 {% block post_content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} text-center"
+                 style="margin-top: 20px; margin-bottom: 0;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     {% for post in posts %}
         <article class="post post-1">
             <header class="entry-header">

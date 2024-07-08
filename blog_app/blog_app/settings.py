@@ -48,7 +48,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Installed Middlewares
-    "debug_toolbar.middleware.DebugToolbarMiddleware"
+    # "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
 
 ROOT_URLCONF = "blog_app.urls"
