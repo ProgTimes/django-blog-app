@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.db import models
 from django.urls import reverse
 
@@ -21,7 +22,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField()
     image = models.ImageField(upload_to="post-img/%Y/%m/%d", null=True, blank=True)

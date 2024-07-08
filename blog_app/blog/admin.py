@@ -13,9 +13,9 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'content', 'author',)
+    readonly_fields = ('slug',)
     search_fields = ('title', 'content',)
     list_filter = ('created_at',)
-    prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Comment)

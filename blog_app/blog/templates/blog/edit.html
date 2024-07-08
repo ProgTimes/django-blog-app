@@ -2,20 +2,42 @@
 
 {% load static %}
 
-{% block title %}Edit Post{% endblock %}
+{% block title %}
+    {% if post %}
+        Edit Post
+    {% else %}
+        Create New Post
+    {% endif %}
+{% endblock %}
 
 {% block post_content %}
-    <article class="post post-1">
-        <header class="entry-header">
-            <h1 class="entry-title">Edit Post</h1>
-        </header>
-        <div class="entry-content clearfix">
-            <form method="POST" action="{% url 'blog:edit_post' post.slug %}" enctype="multipart/form-data"
-                  class="standard-form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Update</span></button>
-            </form>
-        </div>
-    </article>
+<article class="post post-1">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            {% if post %}
+                Edit Post
+            {% else %}
+                Create New Post
+            {% endif %}
+        </h1>
+    </header>
+    <div class="entry-content clearfix">
+        <form method="POST"
+              action="{% if post %}{% url 'blog:edit_post' post.slug %}{% else %}{% url 'blog:post_create' %}{% endif %}"
+              enctype="multipart/form-data"
+              class="standard-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-send btn-5 btn-5b ion-ios-paperplane">
+                <span>
+                    {% if post %}
+                        Update
+                    {% else %}
+                        Create
+                    {% endif %}
+                </span>
+            </button>
+        </form>
+    </div>
+</article>
 {% endblock %}

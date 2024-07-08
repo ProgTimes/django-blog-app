@@ -73,6 +73,20 @@ class AddCommentView(LoginRequiredMixin, views.View):
         return redirect(f"{reverse('blog:post_detail', kwargs={'slug': post.slug})}#comments")
 
 
+class PostCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/edit.html'
+    context_object_name = 'post'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('blog:post_detail', kwargs={'slug': self.object.slug})
+
+
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Post
     form_class = PostForm

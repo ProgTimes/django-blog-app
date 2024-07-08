@@ -6,6 +6,7 @@ app_name = "blog"
 
 urlpatterns = [
     path("", blog_views.PostListView.as_view(), name="post_list"),
+    path("post/create", blog_views.PostCreateView.as_view(), name="post_create"),
     path("post/<str:slug>", blog_views.PostSingleView.as_view(), name="post_detail"),
     path("post/<str:slug>/edit", blog_views.PostUpdateView.as_view(), name="edit_post"),
     path("post/<str:slug>/delete", blog_views.delete_post, name="delete_post"),

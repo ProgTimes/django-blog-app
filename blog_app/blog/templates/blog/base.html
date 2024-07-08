@@ -5,6 +5,11 @@
 <aside class="col-md-3">
     {% categories %}
     {% recent_posts %}
+    <div style="margin-top: 40px;">
+        <a href="{% url 'blog:post_create' %}">
+            <button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Create post</span></button>
+        </a>
+    </div>
 </aside>
 <main class="col-md-9">
     {% block post_content %}{% endblock %}
